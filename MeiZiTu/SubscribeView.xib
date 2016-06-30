@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="SubscribeView">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="提示：输入网址即可订阅网址的所有图片" textAlignment="natural" lineBreakMode="characterWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zpP-nl-Ze8">
+                    <rect key="frame" x="8" y="30" width="246" height="36"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="填写网址链接" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mu1-OZ-7ZQ">
+                    <rect key="frame" x="8" y="112" width="246" height="30"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits"/>
+                </textField>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nOO-db-web">
+                    <rect key="frame" x="266" y="112" width="46" height="30"/>
+                    <color key="backgroundColor" red="0.16470588235294117" green="0.73333333333333328" blue="0.61960784313725492" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="46" id="n4z-7v-uN4"/>
+                    </constraints>
+                    <state key="normal" title="订阅">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="subButtonClicked:" destination="iN0-l3-epB" eventType="touchUpInside" id="7bT-Ml-Skl"/>
+                    </connections>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="我的订阅：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9dx-Us-Pl1">
+                    <rect key="frame" x="8" y="157" width="75" height="18"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Rvy-S5-hIA">
+                    <rect key="frame" x="0.0" y="183" width="320" height="385"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                </tableView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E8D-0e-jiz">
+                    <rect key="frame" x="266" y="30" width="46" height="36"/>
+                    <color key="backgroundColor" red="0.1647058824" green="0.73333333329999995" blue="0.61960784310000006" alpha="1" colorSpace="calibratedRGB"/>
+                    <state key="normal" title="关闭">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="closeButtonClicked:" destination="iN0-l3-epB" eventType="touchUpInside" id="MwR-6g-61j"/>
+                    </connections>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="订阅名称：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="77H-Gm-3Zg">
+                    <rect key="frame" x="8" y="74" width="75" height="30"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="萌宠、风景、美图..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Xdb-SO-fri">
+                    <rect key="frame" x="91" y="74" width="163" height="30"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="nEx-l3-9sa"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits"/>
+                </textField>
+            </subviews>
+            <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="zpP-nl-Ze8" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="30" id="12Z-mi-Zbb"/>
+                <constraint firstItem="77H-Gm-3Zg" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="3Ed-5i-lgq"/>
+                <constraint firstItem="zpP-nl-Ze8" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="3LP-J8-AxY"/>
+                <constraint firstItem="Rvy-S5-hIA" firstAttribute="top" secondItem="9dx-Us-Pl1" secondAttribute="bottom" constant="8" id="3ug-S4-aXw"/>
+                <constraint firstItem="9dx-Us-Pl1" firstAttribute="top" secondItem="mu1-OZ-7ZQ" secondAttribute="bottom" constant="15" id="4oK-4L-Ykx"/>
+                <constraint firstAttribute="bottom" secondItem="Rvy-S5-hIA" secondAttribute="bottom" id="55K-6i-O4K"/>
+                <constraint firstItem="9dx-Us-Pl1" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="72N-2p-ez0"/>
+                <constraint firstItem="77H-Gm-3Zg" firstAttribute="bottom" secondItem="Xdb-SO-fri" secondAttribute="bottom" id="7cz-4C-JRS"/>
+                <constraint firstItem="77H-Gm-3Zg" firstAttribute="top" secondItem="zpP-nl-Ze8" secondAttribute="bottom" constant="8" id="82U-mL-SOk"/>
+                <constraint firstItem="E8D-0e-jiz" firstAttribute="leading" secondItem="zpP-nl-Ze8" secondAttribute="trailing" constant="12" id="AdM-qS-2OE"/>
+                <constraint firstAttribute="trailing" secondItem="nOO-db-web" secondAttribute="trailing" constant="8" id="ApW-aN-VJx"/>
+                <constraint firstItem="mu1-OZ-7ZQ" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="BJ1-kD-fxs"/>
+                <constraint firstAttribute="trailing" secondItem="Rvy-S5-hIA" secondAttribute="trailing" id="C4C-Nd-ohW"/>
+                <constraint firstItem="E8D-0e-jiz" firstAttribute="top" secondItem="zpP-nl-Ze8" secondAttribute="top" id="CXc-aT-YfU"/>
+                <constraint firstItem="E8D-0e-jiz" firstAttribute="leading" secondItem="nOO-db-web" secondAttribute="leading" id="Qoh-sG-347"/>
+                <constraint firstItem="nOO-db-web" firstAttribute="bottom" secondItem="mu1-OZ-7ZQ" secondAttribute="bottom" id="Ra6-BI-cWa"/>
+                <constraint firstItem="Xdb-SO-fri" firstAttribute="top" secondItem="77H-Gm-3Zg" secondAttribute="top" id="SCn-bt-63C"/>
+                <constraint firstItem="nOO-db-web" firstAttribute="top" secondItem="mu1-OZ-7ZQ" secondAttribute="top" id="UTU-jd-5T4"/>
+                <constraint firstItem="Xdb-SO-fri" firstAttribute="trailing" secondItem="mu1-OZ-7ZQ" secondAttribute="trailing" id="WeY-Kz-6d1"/>
+                <constraint firstItem="Xdb-SO-fri" firstAttribute="leading" secondItem="77H-Gm-3Zg" secondAttribute="trailing" constant="8" id="azc-hv-e6T"/>
+                <constraint firstItem="E8D-0e-jiz" firstAttribute="bottom" secondItem="zpP-nl-Ze8" secondAttribute="bottom" id="dih-JT-PYw"/>
+                <constraint firstItem="nOO-db-web" firstAttribute="leading" secondItem="mu1-OZ-7ZQ" secondAttribute="trailing" constant="12" id="hGL-Mx-b4H"/>
+                <constraint firstItem="Rvy-S5-hIA" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="nHV-2r-Ysy"/>
+                <constraint firstItem="E8D-0e-jiz" firstAttribute="trailing" secondItem="nOO-db-web" secondAttribute="trailing" id="qgI-Rp-V8e"/>
+                <constraint firstItem="mu1-OZ-7ZQ" firstAttribute="top" secondItem="Xdb-SO-fri" secondAttribute="bottom" constant="8" id="wGR-BU-5tH"/>
+            </constraints>
+            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+            <connections>
+                <outlet property="subButton" destination="nOO-db-web" id="Dvs-tQ-PGJ"/>
+                <outlet property="subNameTextField" destination="Xdb-SO-fri" id="v2B-h9-BaJ"/>
+                <outlet property="subTableView" destination="Rvy-S5-hIA" id="lFw-Yr-hXc"/>
+                <outlet property="subTextField" destination="mu1-OZ-7ZQ" id="p8Z-O8-pFJ"/>
+            </connections>
+            <point key="canvasLocation" x="-1320" y="1277"/>
+        </view>
+    </objects>
+</document>

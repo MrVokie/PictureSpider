@@ -1,0 +1,10 @@
+/* 
+  Localizable.strings
+  MeiZiTu
+
+  Created by Vokie on 16/6/3.
+  Copyright © 2016年 Vokie. All rights reserved.
+*/
+
+//MWPhotoBrowser里面的符号转换
+"of" = "/";
