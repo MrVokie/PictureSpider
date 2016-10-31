@@ -16,6 +16,7 @@
 
 #import <MJRefresh/MJRefresh.h>
 #import <Masonry/Masonry.h>
+#import <CWStatusBarNotification.h>
 
 #define UIColorMake(r, g, b) [UIColor colorWithRed:r/255.0f green:g/255.0f blue:b/255.0f alpha:1]
 
@@ -35,7 +36,7 @@
 
 #define STATUS_BAR_HEIGHT 20
 
-#define COLOR_THEME UIColorMake(42, 187, 158)
+#define COLOR_THEME UIColorMake(53, 179, 142)
 
 //重定义系统的NSLog函数
 #define NSLog(format, ...) do {                                                 \

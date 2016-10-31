@@ -21,6 +21,7 @@
 #import "DatabaseManager.h"
 #import "SettingViewController.h"
 #import "ALAssetsLibrary+CustomPhotoAlbum.h"
+#import "SplashView.h"
 
 #define CELL_IDENTIFIER @"WaterfallCell"
 #define HEADER_IDENTIFIER @"WaterfallHeader"
@@ -37,6 +38,9 @@
 @property (nonatomic, retain) NSString *homeWebsite;
 @property (nonatomic, strong) ALAssetsLibrary * assetsLibrary;
 @property (nonatomic, assign) NSInteger webUrlIndex;
+@property (nonatomic, retain) SplashView *splashView;
+@property (nonatomic, assign) BOOL isShowStatusBar;
+@property (nonatomic, retain) CWStatusBarNotification *notification;
 @end
 
 @implementation ViewController
@@ -81,6 +85,16 @@
     return _cellSizes;
 }
 
+- (CWStatusBarNotification *)notification {
+    if (!_notification) {
+        _notification = [[CWStatusBarNotification alloc]init];
+        _notification.notificationLabelBackgroundColor = COLOR_THEME;
+        _notification.notificationLabelTextColor = [UIColor whiteColor];
+        _notification.notificationAnimationInStyle = CWNotificationAnimationStyleTop;
+    }
+    return _notification;
+}
+
 - (NSMutableArray *)imageUrlArray {
     if (!_imageUrlArray) {
         _imageUrlArray = [NSMutableArray array];
@@ -120,6 +134,19 @@
     return _assetsLibrary;
 }
 
+- (void)showSplashView {
+    _splashView = [[[NSBundle mainBundle] loadNibNamed:@"SplashView" owner:self options:nil] firstObject];
+    _splashView.frame = CGRectMake(0, 0, APP_SCREEN_WIDTH, APP_SCREEN_HEIGHT);
+    _splashView.showTime = 2.5f;  //启动广告展示时间
+    
+    //提前0.3秒显示状态栏，修复状态栏显示引起的导航栏跳跃
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)((_splashView.showTime) * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        _isShowStatusBar = YES;
+        [self setNeedsStatusBarAppearanceUpdate];
+    });
+    [_splashView showInView];
+}
+
 #pragma mark - 生命周期
 
 - (void)dealloc {
@@ -129,6 +156,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
+    
+    //显示广告加载页面
+    [self showSplashView];
     
     NSDictionary *dict = [[DatabaseManager sharedManager] getFocusWebsite];
     self.homeWebsite = dict[@"site"];
@@ -157,21 +189,24 @@
         _urlArray = nil;
         _mwPhotoArray = nil;
         
+        //切换网址或者重新头部刷新时、停下footer刷新
+        [self.collectionView.mj_footer endRefreshing];
+        
         // 进入刷新状态后会自动调用这个block
         [[HTTPSessionManager sharedManager]requestWithMethod:GET path:self.homeWebsite params:nil successBlock:^(id responseObject) {
             NSString *result1 = [EncodeManager encodeWithData:responseObject];
             if (result1 == nil || result1.length == 0) {
                 [self.collectionView.mj_header endRefreshing];
-                [MBProgressHUD showWithText:@"站点无数据"];
+                [self.notification displayNotificationWithMessage:@"站点无数据.." forDuration:2.0f];
                 return;
             }
-            NSLog(@"返回的数据：%@", result1);
+//            NSLog(@"返回的数据：%@", result1);
             weakSelf.imageUrlArray = [self excludeDuplicated:[RegManager regProcessWithContent:result1]];
             
             weakSelf.urlArray = [self excludeDuplicated:[RegManager crawWebWithContent:result1]];
             
-            NSLog(@"%@", weakSelf.urlArray);
-            NSLog(@"%@", weakSelf.imageUrlArray);
+//            NSLog(@"%@", weakSelf.urlArray);
+//            NSLog(@"%@", weakSelf.imageUrlArray);
             
             for (NSString *imgUrl in self.imageUrlArray) {
                 [self.mwPhotoArray addObject:[MWPhoto photoWithURL:[NSURL URLWithString:imgUrl]]];
@@ -179,8 +214,9 @@
             
             [self.collectionView reloadData];
             [self.collectionView.mj_header endRefreshing];
+            [self.collectionView.mj_footer beginRefreshing];
         } failureBlock:^(NSError *error) {
-            [MBProgressHUD showWithText:@"网址没响应"];
+            [self.notification displayNotificationWithMessage:@"网址没响应.." forDuration:2.0f];
             [self.collectionView.mj_header endRefreshing];
             
         }];
@@ -188,7 +224,7 @@
     
     self.collectionView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
         if (self.webUrlIndex >= self.urlArray.count) {
-            [MBProgressHUD showWithText:@"已经全部加载"];
+            [self.notification displayNotificationWithMessage:@"已经全部加载" forDuration:2.0f];
             [self.collectionView.mj_footer endRefreshing];
             return;
         }
@@ -198,30 +234,31 @@
         // 进入刷新状态后会自动调用这个block
         [[HTTPSessionManager sharedManager]requestWithMethod:GET path:urlPath params:nil successBlock:^(id responseObject) {
             
+            
+            
             NSString *result1 = [EncodeManager encodeWithData:responseObject];
             
             if (result1 == nil || result1.length == 0) {
                 [self.collectionView.mj_footer endRefreshing];
-                [MBProgressHUD showWithText:@"站点无数据，已为您跳过"];
+                [self.notification displayNotificationWithMessage:@"站点无数据，已为您跳过.." forDuration:2.0f];
                 self.webUrlIndex++;
                 [self.collectionView.mj_footer beginRefreshing];
                 
                 return;
             }
-            NSLog(@"返回的数据：%@", result1);
+//            NSLog(@"返回的数据：%@", result1);
             NSMutableArray *currentPageImageUrls = [self excludeDuplicated:[RegManager regProcessWithContent:result1]];
             [weakSelf.imageUrlArray addObjectsFromArray:currentPageImageUrls];
             
             [weakSelf.urlArray addObjectsFromArray:[self excludeDuplicated:[RegManager crawWebWithContent:result1]]];
-            NSLog(@"%@", weakSelf.imageUrlArray);
+//            NSLog(@"%@", weakSelf.imageUrlArray);
             
             
             if (!currentPageImageUrls.count) {
                 [self.collectionView.mj_footer endRefreshing];
-                [MBProgressHUD showWithText:@"站点无数据，已为您跳过"];
+                [self.notification displayNotificationWithMessage:@"站点无数据，已为您跳过.." forDuration:2.0f];
                 self.webUrlIndex++;
                 [self.collectionView.mj_footer beginRefreshing];
-                
                 return;
             }
             
@@ -233,9 +270,11 @@
             [self.collectionView reloadData];
             [self.collectionView.mj_footer endRefreshing];
             
+            [self.collectionView.mj_footer beginRefreshing];
+            
         } failureBlock:^(NSError *error) {
             [self.collectionView.mj_footer endRefreshing];
-            [MBProgressHUD showWithText:@"站点无数据，已为您跳过"];
+            [self.notification displayNotificationWithMessage:@"站点无数据，已为您跳过.." forDuration:2.0f];
             self.webUrlIndex++;
             [self.collectionView.mj_footer beginRefreshing];
             
@@ -245,6 +284,11 @@
     [self.collectionView.mj_header beginRefreshing];
     
     
+}
+
+
+- (BOOL)prefersStatusBarHidden {
+    return !_isShowStatusBar;
 }
 
 - (NSMutableArray *)excludeDuplicated:(NSMutableArray *)array {
@@ -309,7 +353,7 @@
     (CHTCollectionViewWaterfallCell *)[collectionView dequeueReusableCellWithReuseIdentifier:CELL_IDENTIFIER
                                                                                 forIndexPath:indexPath];
 //    cell.imageView.image = [UIImage imageNamed:self.imageUrlArray[indexPath.item % 4]];
-    [cell.imageView sd_setImageWithURL:[NSURL URLWithString:self.imageUrlArray[indexPath.item]] placeholderImage:[UIImage imageNamed:@"cat1"] options:(SDWebImageRetryFailed | SDWebImageProgressiveDownload) completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+    [cell.imageView sd_setImageWithURL:[NSURL URLWithString:self.imageUrlArray[indexPath.item]] placeholderImage:[UIImage imageNamed:@"default_image"] options:(SDWebImageRetryFailed | SDWebImageProgressiveDownload) completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
         
     }];
     return cell;

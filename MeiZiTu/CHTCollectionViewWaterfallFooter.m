@@ -15,7 +15,7 @@
 - (id)initWithFrame:(CGRect)frame {
   if (self = [super initWithFrame:frame]) {
       UIImageView *imageView = [[UIImageView alloc]initWithFrame:frame];
-      [imageView sd_setImageWithURL:[NSURL URLWithString:@"http://cdn.cocimg.com/bbs/attachment/upload/85/5221851449654525.jpg"] placeholderImage:[UIImage imageNamed:@"cat1"] options:SDWebImageProgressiveDownload];
+      [imageView sd_setImageWithURL:[NSURL URLWithString:@"http://cdn.cocimg.com/bbs/attachment/upload/85/5221851449654525.jpg"] placeholderImage:[UIImage imageNamed:@"default_image"] options:SDWebImageProgressiveDownload];
       imageView.contentMode = UIViewContentModeScaleAspectFill;
       imageView.clipsToBounds = YES;
       [self addSubview:imageView];

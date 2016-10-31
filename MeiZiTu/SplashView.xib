@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="SplashView">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="launch" translatesAutoresizingMaskIntoConstraints="NO" id="Rrp-k1-jEl">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ad" translatesAutoresizingMaskIntoConstraints="NO" id="b1Z-Ir-XnY">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="448"/>
+                </imageView>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="b1Z-Ir-XnY" secondAttribute="trailing" id="71k-n9-aA4"/>
+                <constraint firstAttribute="trailing" secondItem="Rrp-k1-jEl" secondAttribute="trailing" id="UrX-Oe-4ye"/>
+                <constraint firstItem="b1Z-Ir-XnY" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="XSE-gL-sh6"/>
+                <constraint firstAttribute="bottom" secondItem="Rrp-k1-jEl" secondAttribute="bottom" id="Yb1-7e-4Mt"/>
+                <constraint firstItem="Rrp-k1-jEl" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="ZbL-fB-yQH"/>
+                <constraint firstAttribute="bottom" secondItem="b1Z-Ir-XnY" secondAttribute="bottom" constant="120" id="eBN-vK-F6e"/>
+                <constraint firstItem="Rrp-k1-jEl" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="jSZ-ud-eK5"/>
+                <constraint firstItem="b1Z-Ir-XnY" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="yi2-j3-Gqw"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+            <connections>
+                <outlet property="adImageView" destination="b1Z-Ir-XnY" id="iUl-i1-I3g"/>
+            </connections>
+            <point key="canvasLocation" x="428" y="525"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="ad" width="250" height="250"/>
+        <image name="launch" width="320" height="568"/>
+    </resources>
+</document>

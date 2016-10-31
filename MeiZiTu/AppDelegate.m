@@ -23,14 +23,11 @@
     UMConfigInstance.channelId = @"Debug";
     [MobClick startWithConfigure:UMConfigInstance];
     
-    
-    
-    
+    //创建数据库
     [[DatabaseManager sharedManager] createDatabaseWithName:@"mzt.db"];
     [[DatabaseManager sharedManager] createTable];
-    [[DatabaseManager sharedManager] insertWebsite]; //App声明周期执行一次
+    [[DatabaseManager sharedManager] insertWebsite]; //App生命周期有且仅执行一次
     [[DatabaseManager sharedManager] autoUpgrade];
-    
     
     //定义导航条的颜色
     [[UINavigationBar appearance] setBarTintColor:COLOR_THEME];

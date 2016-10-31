@@ -17,6 +17,7 @@ PODS:
   - CHTCollectionViewWaterfallLayout (0.9.4):
     - CHTCollectionViewWaterfallLayout/ObjC (= 0.9.4)
   - CHTCollectionViewWaterfallLayout/ObjC (0.9.4)
+  - CWStatusBarNotification (2.3.5)
   - FMDB (2.6):
     - FMDB/standard (= 2.6)
   - FMDB/standard (2.6)
@@ -33,6 +34,7 @@ PODS:
 DEPENDENCIES:
   - AFNetworking
   - CHTCollectionViewWaterfallLayout
+  - CWStatusBarNotification
   - FMDB
   - IQKeyboardManager
   - Masonry
@@ -45,6 +47,7 @@ DEPENDENCIES:
 SPEC CHECKSUMS:
   AFNetworking: a0075feb321559dc78d9d85b55d11caa19eabb93
   CHTCollectionViewWaterfallLayout: db74be9135826d285f45ff163fd090e57c99fc50
+  CWStatusBarNotification: 3d2738b25c3207f60cc50201388d3c96182545ff
   FMDB: c1968bab3ab0aed38f66cb778ae1e7fa9a652b6e
   IQKeyboardManager: 128bcb96b3ec03ff87942cdd7fa7f44491aa3d08
   Masonry: 281802d04d787ea2973179ee8bcb50500579ede2

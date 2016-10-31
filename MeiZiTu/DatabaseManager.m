@@ -8,6 +8,12 @@
 
 #import "DatabaseManager.h"
 
+//订阅的网址类型枚举
+typedef NS_ENUM(NSInteger, AdminType) {
+    AdminTypeUser = 0,
+    AdminTypeSystem
+};
+
 @interface DatabaseManager ()
 
 @property (nonatomic, retain) NSArray *sqlArray;
@@ -27,13 +33,14 @@
 - (BOOL)createDatabaseWithName:(NSString *)dbName {
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentDirectory = [paths firstObject];
-    
     NSString *dbPath = [documentDirectory stringByAppendingPathComponent:dbName];
-    NSLog(@"sqlite3 %@", dbPath);
+    NSLog(@"sqlite_path: %@", dbPath);
     self.db = [FMDatabase databaseWithPath:dbPath];
     if (![self.db open]) {
+        //failed create database.
         return NO;
     }else{
+        //success create database.
         [self.db close];
         return YES;
     }
@@ -50,6 +57,7 @@
     }
 }
 
+//获取订阅的数据列表
 - (NSMutableArray *)getSubscribeData {
     if ([self.db open]) {
         FMResultSet *rs = [self.db executeQuery:@"select * from subscribe_list"];
@@ -73,6 +81,7 @@
     
 }
 
+//获取选中的订阅网址
 - (NSDictionary *)getFocusWebsite {
     if ([self.db open]) {
         FMResultSet *rs = [self.db executeQuery:@"select * from focus_website"];
@@ -91,9 +100,9 @@
     }else{
         return nil;
     }
-    
 }
 
+//更新选中的订阅网址
 - (BOOL)updateFocusWebsite:(NSString *)site name:(NSString *)name {
     if ([self.db open]) {
         NSString *sql = [NSString stringWithFormat:@"UPDATE focus_website set web_name = '%@', website = '%@'", name, site];
@@ -107,6 +116,7 @@
     
 }
 
+//创建table表
 - (void)createTable {
     self.sqlArray = @[@"CREATE TABLE IF NOT EXISTS subscribe_list (id INTEGER PRIMARY KEY AUTOINCREMENT,name TEXT, address TEXT, admin INTEGER)",//订阅名称，网页地址，区别是用户订阅还是默认值
                       @"CREATE TABLE IF NOT EXISTS db_version (version INTEGER)", //数据库版本
@@ -119,6 +129,8 @@
 
 - (void)insertWebsite {
     if ([self.db open]) {
+        
+        //判断是否是首次进入App初始插入默认网址数据
         BOOL hasData = NO;
         FMResultSet *rs = [self.db executeQuery:@"SELECT * FROM db_version"];
         while ([rs next]) {
@@ -134,16 +146,15 @@
             //插入数据库版本
             [self.db executeUpdate:@"insert into db_version(version) values(?)", DB_START_VERSION];
             //插入系统默认订阅网址
-            [self.db executeUpdate:@"insert into subscribe_list(id, name, address, admin) values(?, ?, ?, ?)", @1, @"CocoaChina", @"http://www.CocoaChina.com", @1];
-            [self.db executeUpdate:@"insert into subscribe_list(id, name, address, admin) values(?, ?, ?, ?)", @2, @"豆瓣", @"https://www.douban.com", @1];
-            [self.db executeUpdate:@"insert into subscribe_list(id, name, address, admin) values(?, ?, ?, ?)", @3, @"妹子图", @"http://www.99mm.me", @1];
-            [self.db executeUpdate:@"insert into subscribe_list(id, name, address, admin) values(?, ?, ?, ?)", @4, @"煎蛋网", @"http://i.jandan.net/ooxx", @1];
-            [self.db executeUpdate:@"insert into subscribe_list(id, name, address, admin) values(?, ?, ?, ?)", @5, @"网易", @"http://www.163.com", @1];
+            [self.db executeUpdate:@"insert into subscribe_list(id, name, address, admin) values(?, ?, ?, ?)", @1, @"CocoaChina", @"http://www.CocoaChina.com", @(AdminTypeSystem)];
+            [self.db executeUpdate:@"insert into subscribe_list(id, name, address, admin) values(?, ?, ?, ?)", @5, @"网易", @"http://www.163.com", @(AdminTypeSystem)];
+            [self.db executeUpdate:@"insert into subscribe_list(id, name, address, admin) values(?, ?, ?, ?)", @2, @"豆瓣", @"https://www.douban.com", @(AdminTypeSystem)];
+            [self.db executeUpdate:@"insert into subscribe_list(id, name, address, admin) values(?, ?, ?, ?)", @3, @"妹子图", @"http://www.99mm.me", @(AdminTypeSystem)];
+            [self.db executeUpdate:@"insert into subscribe_list(id, name, address, admin) values(?, ?, ?, ?)", @4, @"煎蛋网", @"http://i.jandan.net/ooxx", @(AdminTypeSystem)];
+            
             //插入当前焦点页
             [self.db executeUpdate:@"insert into focus_website(web_name, website) values(?, ?)", @"CocoaChina", @"http://www.CocoaChina.com"];
         }
-        
-        
         
         [self.db close];
     }
@@ -155,8 +166,6 @@
                               @"",//TODO
                               ];
     
-    
-    
     if ([self.db open]) {
         FMResultSet *rs = [self.db executeQuery:@"select * from db_version"];
         while ([rs next]) {
@@ -167,7 +176,6 @@
                 [self executeSQL:upgradeArray[ver]];
                 ver++;
             }
-            
         }
         [rs close];
         
