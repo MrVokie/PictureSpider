@@ -230,6 +230,57 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		A940AC6F1DC9C8BE00DF39FB /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				A940AC701DC9C8EF00DF39FB /* UI */,
+				B8C143341CFDA59800B15644 /* AppDelegate.h */,
+				B8C143351CFDA59800B15644 /* AppDelegate.m */,
+			);
+			name = Main;
+			sourceTree = "<group>";
+		};
+		A940AC701DC9C8EF00DF39FB /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				A991DFBA1D07A78400C2C930 /* SettingVC */,
+				A940AC731DC9C98A00DF39FB /* Subscribe */,
+				A940AC721DC9C97600DF39FB /* Splash */,
+				A940AC711DC9C96800DF39FB /* Home */,
+			);
+			name = UI;
+			sourceTree = "<group>";
+		};
+		A940AC711DC9C96800DF39FB /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				A98726651D01327300750B08 /* Waterfall */,
+				B8C143371CFDA59800B15644 /* ViewController.h */,
+				B8C143381CFDA59800B15644 /* ViewController.m */,
+			);
+			name = Home;
+			sourceTree = "<group>";
+		};
+		A940AC721DC9C97600DF39FB /* Splash */ = {
+			isa = PBXGroup;
+			children = (
+				A93109861DC6EB4A008161B8 /* SplashView.h */,
+				A93109881DC6EB4A008161B8 /* SplashView.m */,
+				A93109871DC6EB4A008161B8 /* SplashView.xib */,
+			);
+			name = Splash;
+			sourceTree = "<group>";
+		};
+		A940AC731DC9C98A00DF39FB /* Subscribe */ = {
+			isa = PBXGroup;
+			children = (
+				A95BC3EE1D05003F0057E746 /* SubscribeView.h */,
+				A95BC3EF1D05003F0057E746 /* SubscribeView.m */,
+				A95BC3F11D0502450057E746 /* SubscribeView.xib */,
+			);
+			name = Subscribe;
+			sourceTree = "<group>";
+		};
 		A9721B411D0FB3EB009AFCC9 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -368,6 +419,8 @@
 		B869B5E61CFDA9A80013B082 /* Manager */ = {
 			isa = PBXGroup;
 			children = (
+				A9E087AD1DC9765600AB7345 /* AppDefault.h */,
+				A9E087AE1DC9765600AB7345 /* AppDefault.m */,
 				B8C848541CFF2ECC00716D77 /* EncodeManager.h */,
 				B8C848551CFF2ECC00716D77 /* EncodeManager.m */,
 				B8C848561CFF2ECC00716D77 /* RegManager.h */,
@@ -424,24 +477,11 @@
 			isa = PBXGroup;
 			children = (
 				A9721B411D0FB3EB009AFCC9 /* Model */,
-				A991DFBA1D07A78400C2C930 /* SettingVC */,
-				A98726651D01327300750B08 /* Waterfall */,
 				A98726571D0115A500750B08 /* ManualPods */,
 				B869B5E71CFDA9BF0013B082 /* Catagory */,
 				B869B5E81CFDA9E10013B082 /* Tool */,
 				B869B5E61CFDA9A80013B082 /* Manager */,
-				B8C143341CFDA59800B15644 /* AppDelegate.h */,
-				B8C143351CFDA59800B15644 /* AppDelegate.m */,
-				B8C143371CFDA59800B15644 /* ViewController.h */,
-				B8C143381CFDA59800B15644 /* ViewController.m */,
-				A95BC3EE1D05003F0057E746 /* SubscribeView.h */,
-				A95BC3EF1D05003F0057E746 /* SubscribeView.m */,
-				A95BC3F11D0502450057E746 /* SubscribeView.xib */,
-				A93109861DC6EB4A008161B8 /* SplashView.h */,
-				A93109881DC6EB4A008161B8 /* SplashView.m */,
-				A93109871DC6EB4A008161B8 /* SplashView.xib */,
-				A9E087AD1DC9765600AB7345 /* AppDefault.h */,
-				A9E087AE1DC9765600AB7345 /* AppDefault.m */,
+				A940AC6F1DC9C8BE00DF39FB /* Main */,
 				B8C143311CFDA59800B15644 /* Supporting Files */,
 			);
 			path = MeiZiTu;

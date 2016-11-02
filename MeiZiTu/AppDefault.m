@@ -21,6 +21,9 @@
 
 - (BOOL)loadDiskDataToMemory {
     self.autoLoadMore = [[NSUserDefaults standardUserDefaults] boolForKey:@"autoLoadMore"];
+    
+    //当ua不存在时，默认设置为YES(首次初始化)
+    [[NSUserDefaults standardUserDefaults] registerDefaults:@{@"ua":@(YES)}];
     self.ua = [[NSUserDefaults standardUserDefaults] boolForKey:@"ua"];
     return YES;
 }

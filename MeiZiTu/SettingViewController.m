@@ -46,7 +46,7 @@
     
     NSString *uaString = @"手机站点";
     
-    if ([[NSUserDefaults standardUserDefaults]boolForKey:@"ua"]) {
+    if ([AppDefault sharedManager].ua) {
         uaString = @"电脑站点";
     }
     self.settingArray = @[@{@"id":@"1021", @"name":@"自动加载", @"value":@"0"},
