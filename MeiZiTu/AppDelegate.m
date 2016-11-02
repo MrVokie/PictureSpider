@@ -29,6 +29,8 @@
     [[DatabaseManager sharedManager] insertWebsite]; //App生命周期有且仅执行一次
     [[DatabaseManager sharedManager] autoUpgrade];
     
+    [[AppDefault sharedManager] loadDiskDataToMemory];
+    
     //定义导航条的颜色
     [[UINavigationBar appearance] setBarTintColor:COLOR_THEME];
     //定义导航条上文字的颜色

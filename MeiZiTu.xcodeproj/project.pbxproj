@@ -70,6 +70,9 @@
 		A9E05F411CFFC21000C84177 /* CHTCollectionViewWaterfallCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A9E05F3C1CFFC21000C84177 /* CHTCollectionViewWaterfallCell.m */; };
 		A9E05F421CFFC21000C84177 /* CHTCollectionViewWaterfallHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = A9E05F3E1CFFC21000C84177 /* CHTCollectionViewWaterfallHeader.m */; };
 		A9E05F431CFFC21000C84177 /* CHTCollectionViewWaterfallFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = A9E05F401CFFC21000C84177 /* CHTCollectionViewWaterfallFooter.m */; };
+		A9E087AB1DC9705900AB7345 /* ToggleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A9E087A91DC9705900AB7345 /* ToggleCell.m */; };
+		A9E087AC1DC9705900AB7345 /* ToggleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A9E087AA1DC9705900AB7345 /* ToggleCell.xib */; };
+		A9E087AF1DC9765600AB7345 /* AppDefault.m in Sources */ = {isa = PBXBuildFile; fileRef = A9E087AE1DC9765600AB7345 /* AppDefault.m */; };
 		B869B5E21CFDA99F0013B082 /* UIView+Vokie.m in Sources */ = {isa = PBXBuildFile; fileRef = B869B5DB1CFDA99F0013B082 /* UIView+Vokie.m */; };
 		B869B5E31CFDA99F0013B082 /* JsonTools.m in Sources */ = {isa = PBXBuildFile; fileRef = B869B5DD1CFDA99F0013B082 /* JsonTools.m */; };
 		B869B5E41CFDA99F0013B082 /* DatabaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B869B5DF1CFDA99F0013B082 /* DatabaseManager.m */; };
@@ -170,6 +173,11 @@
 		A9E05F3E1CFFC21000C84177 /* CHTCollectionViewWaterfallHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHTCollectionViewWaterfallHeader.m; sourceTree = "<group>"; };
 		A9E05F3F1CFFC21000C84177 /* CHTCollectionViewWaterfallFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHTCollectionViewWaterfallFooter.h; sourceTree = "<group>"; };
 		A9E05F401CFFC21000C84177 /* CHTCollectionViewWaterfallFooter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHTCollectionViewWaterfallFooter.m; sourceTree = "<group>"; };
+		A9E087A81DC9705900AB7345 /* ToggleCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ToggleCell.h; sourceTree = "<group>"; };
+		A9E087A91DC9705900AB7345 /* ToggleCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ToggleCell.m; sourceTree = "<group>"; };
+		A9E087AA1DC9705900AB7345 /* ToggleCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ToggleCell.xib; sourceTree = "<group>"; };
+		A9E087AD1DC9765600AB7345 /* AppDefault.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDefault.h; sourceTree = "<group>"; };
+		A9E087AE1DC9765600AB7345 /* AppDefault.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDefault.m; sourceTree = "<group>"; };
 		B869B5DA1CFDA99F0013B082 /* UIView+Vokie.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Vokie.h"; sourceTree = "<group>"; };
 		B869B5DB1CFDA99F0013B082 /* UIView+Vokie.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Vokie.m"; sourceTree = "<group>"; };
 		B869B5DC1CFDA99F0013B082 /* JsonTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JsonTools.h; sourceTree = "<group>"; };
@@ -350,6 +358,9 @@
 				A991DFBB1D07A7CC00C2C930 /* SettingCell.h */,
 				A991DFBC1D07A7CC00C2C930 /* SettingCell.m */,
 				A991DFBD1D07A7CC00C2C930 /* SettingCell.xib */,
+				A9E087A81DC9705900AB7345 /* ToggleCell.h */,
+				A9E087A91DC9705900AB7345 /* ToggleCell.m */,
+				A9E087AA1DC9705900AB7345 /* ToggleCell.xib */,
 			);
 			name = SettingVC;
 			sourceTree = "<group>";
@@ -429,6 +440,8 @@
 				A93109861DC6EB4A008161B8 /* SplashView.h */,
 				A93109881DC6EB4A008161B8 /* SplashView.m */,
 				A93109871DC6EB4A008161B8 /* SplashView.xib */,
+				A9E087AD1DC9765600AB7345 /* AppDefault.h */,
+				A9E087AE1DC9765600AB7345 /* AppDefault.m */,
 				B8C143311CFDA59800B15644 /* Supporting Files */,
 			);
 			path = MeiZiTu;
@@ -512,6 +525,7 @@
 				A98726341D0114F400750B08 /* PlayButtonOverlayLarge.png in Resources */,
 				A987262C1D0114F400750B08 /* ImageSelectedOn@2x.png in Resources */,
 				A97F304C1DC6F29900918191 /* Main.storyboard in Resources */,
+				A9E087AC1DC9705900AB7345 /* ToggleCell.xib in Resources */,
 				A98726431D0114F400750B08 /* VideoOverlay.png in Resources */,
 				A98726391D0114F400750B08 /* PlayButtonOverlayLargeTap@3x.png in Resources */,
 				A987263A1D0114F400750B08 /* UIBarButtonItemArrowLeft.png in Resources */,
@@ -621,6 +635,8 @@
 				A98726561D01153100750B08 /* DALabeledCircularProgressView.m in Sources */,
 				A9E05F421CFFC21000C84177 /* CHTCollectionViewWaterfallHeader.m in Sources */,
 				B8C143361CFDA59800B15644 /* AppDelegate.m in Sources */,
+				A9E087AF1DC9765600AB7345 /* AppDefault.m in Sources */,
+				A9E087AB1DC9705900AB7345 /* ToggleCell.m in Sources */,
 				A991DFBE1D07A7CC00C2C930 /* SettingCell.m in Sources */,
 				B869B5E51CFDA99F0013B082 /* HTTPSessionManager.m in Sources */,
 				B8C848581CFF2ECC00716D77 /* EncodeManager.m in Sources */,

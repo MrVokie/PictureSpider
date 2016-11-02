@@ -22,9 +22,7 @@
         [self.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Accept"];
         [self.requestSerializer setValue:url.absoluteString forHTTPHeaderField:@"Referer"];
         
-        [[NSUserDefaults standardUserDefaults]registerDefaults:@{@"ua":@(YES)}];
-        
-        BOOL uaflag = [[NSUserDefaults standardUserDefaults]boolForKey:@"ua"];
+        BOOL uaflag = [AppDefault sharedManager].ua;
         [self switchUserAgentToPC:uaflag];
         
         self.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/plain", @"text/javascript", @"text/json", @"text/html", nil];

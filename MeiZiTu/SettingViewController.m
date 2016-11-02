@@ -11,6 +11,8 @@
 #import <SDImageCache.h>
 #import "MBProgressHUD+EasyUse.h"
 #import "HTTPSessionManager.h"
+#import "ToggleCell.h"
+#import "AppDefault.h"
 
 @interface SettingViewController ()<UITableViewDelegate, UITableViewDataSource, UIActionSheetDelegate>
 
@@ -34,6 +36,7 @@
     
     self.mTableView.rowHeight = 55;
     [self.mTableView registerNib:[UINib nibWithNibName:@"SettingCell" bundle:nil] forCellReuseIdentifier:@"Setting_Cell"];
+    [self.mTableView registerNib:[UINib nibWithNibName:@"ToggleCell" bundle:nil] forCellReuseIdentifier:@"Toggle_Cell"];
 }
 
 - (void)initDataArray {
@@ -46,7 +49,8 @@
     if ([[NSUserDefaults standardUserDefaults]boolForKey:@"ua"]) {
         uaString = @"电脑站点";
     }
-    self.settingArray = @[@{@"id":@"1023", @"name":@"神隐切换", @"value":uaString},
+    self.settingArray = @[@{@"id":@"1021", @"name":@"自动加载", @"value":@"0"},
+                          @{@"id":@"1023", @"name":@"神隐切换", @"value":uaString},
                           @{@"id":@"1009", @"name":@"数据缓存", @"value":size},
                           @{@"id":@"1032", @"name":@"反馈", @"value":@"提提建议"},
                           @{@"id":@"1058", @"name":@"关于", @"value":@"了解更多"}];
@@ -67,6 +71,13 @@
     }
 }
 
+- (void)toggleEvent:(id)sender {
+    UISwitch *toggleButton = sender;
+    BOOL flag = toggleButton.isOn;
+    [AppDefault sharedManager].autoLoadMore = flag;
+    [[NSUserDefaults standardUserDefaults] setBool:flag forKey:@"autoLoadMore"];
+}
+
 #pragma mark - UITableView Delegate
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -74,10 +85,19 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    SettingCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Setting_Cell" forIndexPath:indexPath];
-    cell.leftLabel.text = self.settingArray[indexPath.row][@"name"];
-    cell.rightLabel.text = self.settingArray[indexPath.row][@"value"];
-    return cell;
+    if (indexPath.row == 0) {
+        ToggleCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Toggle_Cell" forIndexPath:indexPath];
+        cell.titleTextLabel.text = self.settingArray[indexPath.row][@"name"];
+        cell.toggleButton.on = [AppDefault sharedManager].autoLoadMore;
+        [cell.toggleButton addTarget:self action:@selector(toggleEvent:) forControlEvents:UIControlEventValueChanged];
+        return cell;
+    }else{
+        SettingCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Setting_Cell" forIndexPath:indexPath];
+        cell.leftLabel.text = self.settingArray[indexPath.row][@"name"];
+        cell.rightLabel.text = self.settingArray[indexPath.row][@"value"];
+        return cell;
+    }
+    
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -115,10 +135,12 @@
     NSLog(@">>%ld", buttonIndex);
     if (buttonIndex == 0) {
         [[NSUserDefaults standardUserDefaults]setBool:YES forKey:@"ua"];
+        [AppDefault sharedManager].ua = YES;
         [[HTTPSessionManager sharedManager] switchUserAgentToPC:YES];
         [MBProgressHUD showWithText:@"切换完成"];
     }else if (buttonIndex == 1) {
         [[NSUserDefaults standardUserDefaults]setBool:NO forKey:@"ua"];
+        [AppDefault sharedManager].ua = NO;
         [[HTTPSessionManager sharedManager] switchUserAgentToPC:NO];
         [MBProgressHUD showWithText:@"切换完成"];
     }

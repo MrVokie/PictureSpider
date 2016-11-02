@@ -46,7 +46,7 @@
 
 - (UIView *)editView {
     if (!_editView) {
-        _editView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, APP_SCREEN_WIDTH - 40, (APP_SCREEN_WIDTH - 40) * 3 / 4.0f)];
+        _editView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, APP_SCREEN_WIDTH - 40, 250)];
         _editView.backgroundColor = UIColorMake(243, 243, 243);
         _editView.layer.cornerRadius = 5;
         _editView.layer.masksToBounds = YES;
@@ -68,10 +68,10 @@
         
         //名称输入框
         UILabel *nameLabel = [[UILabel alloc]init];
-        nameLabel.text = @"订阅名称：";
+        nameLabel.text = @"订阅名称:";
         [_editView addSubview:nameLabel];
         [nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.leading.equalTo(_editView).offset(16);
+            make.leading.equalTo(_editView).offset(8);
             make.top.equalTo(titleLabel.mas_bottom).offset(25);
             make.width.mas_equalTo(85);
             make.height.mas_equalTo(35);
@@ -84,15 +84,15 @@
             make.leading.equalTo(nameLabel.mas_trailing);
             make.centerY.equalTo(nameLabel.mas_centerY);
             make.height.mas_equalTo(35);
-            make.trailing.equalTo(_editView).offset(-16);
+            make.trailing.equalTo(_editView).offset(-8);
         }];
         
         //网址输入框
         UILabel *siteLabel = [[UILabel alloc]init];
-        siteLabel.text = @"订阅网址：";
+        siteLabel.text = @"订阅网址:";
         [_editView addSubview:siteLabel];
         [siteLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.leading.equalTo(_editView).offset(16);
+            make.leading.equalTo(_editView).offset(8);
             make.top.equalTo(nameLabel.mas_bottom).offset(20);
             make.width.mas_equalTo(85);
             make.height.mas_equalTo(35);
@@ -105,7 +105,7 @@
             make.leading.equalTo(siteLabel.mas_trailing);
             make.centerY.equalTo(siteLabel.mas_centerY);
             make.height.mas_equalTo(35);
-            make.trailing.equalTo(_editView).offset(-16);
+            make.trailing.equalTo(_editView).offset(-8);
         }];
         
         self.doneButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -199,6 +199,18 @@
     
     [self.subTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"Default_Cell"];
     self.subTableView.tableFooterView = [[UIView alloc]init];
+    
+    self.closeButton.layer.cornerRadius = 5;
+    self.closeButton.layer.masksToBounds = YES;
+    
+    self.subButton.layer.cornerRadius = 5;
+    self.subButton.layer.masksToBounds = YES;
+    
+    self.subNameTextField.layer.cornerRadius = 5;
+    self.subNameTextField.layer.masksToBounds = YES;
+    
+    self.subTextField.layer.cornerRadius = 5;
+    self.subTextField.layer.masksToBounds = YES;
 }
 
 #pragma mark - UITableView Delegate/DataSource
@@ -273,7 +285,7 @@
 }
 
 - (void)closeSubscribeView {
-    [UIView animateWithDuration:0.3f delay:0.0f options:UIViewAnimationOptionCurveEaseOut animations:^{
+    [UIView animateWithDuration:0.2f delay:0.0f options:UIViewAnimationOptionCurveEaseOut animations:^{
         CGRect rect = CGRectMake(-APP_SCREEN_WIDTH, 0, APP_SCREEN_WIDTH, APP_SCREEN_HEIGHT);
         self.frame = rect;
     } completion:^(BOOL finished) {

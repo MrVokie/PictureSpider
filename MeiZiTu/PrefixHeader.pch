@@ -17,6 +17,7 @@
 #import <MJRefresh/MJRefresh.h>
 #import <Masonry/Masonry.h>
 #import <CWStatusBarNotification.h>
+#import "AppDefault.h"
 
 #define UIColorMake(r, g, b) [UIColor colorWithRed:r/255.0f green:g/255.0f blue:b/255.0f alpha:1]
 

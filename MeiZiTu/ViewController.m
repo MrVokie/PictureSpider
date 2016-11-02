@@ -214,7 +214,10 @@
             
             [self.collectionView reloadData];
             [self.collectionView.mj_header endRefreshing];
-            [self.collectionView.mj_footer beginRefreshing];
+            if ([AppDefault sharedManager].autoLoadMore) {
+                [self.collectionView.mj_footer beginRefreshing];
+            }
+            
         } failureBlock:^(NSError *error) {
             [self.notification displayNotificationWithMessage:@"网址没响应.." forDuration:2.0f];
             [self.collectionView.mj_header endRefreshing];
@@ -242,7 +245,9 @@
                 [self.collectionView.mj_footer endRefreshing];
                 [self.notification displayNotificationWithMessage:@"站点无数据，已为您跳过.." forDuration:2.0f];
                 self.webUrlIndex++;
-                [self.collectionView.mj_footer beginRefreshing];
+                if ([AppDefault sharedManager].autoLoadMore) {
+                    [self.collectionView.mj_footer beginRefreshing];
+                }
                 
                 return;
             }
@@ -258,7 +263,9 @@
                 [self.collectionView.mj_footer endRefreshing];
                 [self.notification displayNotificationWithMessage:@"站点无数据，已为您跳过.." forDuration:2.0f];
                 self.webUrlIndex++;
-                [self.collectionView.mj_footer beginRefreshing];
+                if ([AppDefault sharedManager].autoLoadMore) {
+                    [self.collectionView.mj_footer beginRefreshing];
+                }
                 return;
             }
             
@@ -270,13 +277,17 @@
             [self.collectionView reloadData];
             [self.collectionView.mj_footer endRefreshing];
             
-            [self.collectionView.mj_footer beginRefreshing];
+            if ([AppDefault sharedManager].autoLoadMore) {
+                [self.collectionView.mj_footer beginRefreshing];
+            }
             
         } failureBlock:^(NSError *error) {
             [self.collectionView.mj_footer endRefreshing];
             [self.notification displayNotificationWithMessage:@"站点无数据，已为您跳过.." forDuration:2.0f];
             self.webUrlIndex++;
-            [self.collectionView.mj_footer beginRefreshing];
+            if ([AppDefault sharedManager].autoLoadMore) {
+                [self.collectionView.mj_footer beginRefreshing];
+            }
             
         }];
     }];
@@ -327,7 +338,7 @@
 }
 
 - (void)subscribe {
-    [UIView animateWithDuration:0.3f delay:0.0f options:UIViewAnimationOptionCurveEaseIn animations:^{
+    [UIView animateWithDuration:0.2f delay:0.0f options:UIViewAnimationOptionCurveEaseOut animations:^{
         CGRect rect = CGRectMake(0, 0, APP_SCREEN_WIDTH, APP_SCREEN_HEIGHT);
         self.subView.frame = rect;
     } completion:^(BOOL finished) {
