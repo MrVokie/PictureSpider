@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 
 @interface EncodeManager : NSObject
-
+/**
+ 对返回的data进行解码，尝试多种解码方式(UTF8、ASCII、Unicode、GB)
+ */
 + (NSString *)encodeWithData:(NSData *)data;
 @end
