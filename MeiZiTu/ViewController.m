@@ -204,7 +204,7 @@
                     
                     //对网址文本进行正则筛选图片链接，网址，并去重
                     weakSelf.imageUrlArray = [self excludeDuplicated:[RegManager regProcessWithContent:result]];
-                    weakSelf.urlArray = [self excludeDuplicated:[RegManager crawWebWithContent:result]];
+                    weakSelf.urlArray = [self excludeDuplicated:[RegManager crawWebWithContent:result originURL:self.homeWebsite]];
                     
                     for (NSString *imgUrl in self.imageUrlArray) {
                         [self.mwPhotoArray addObject:[MWPhoto photoWithURL:[NSURL URLWithString:imgUrl]]];
@@ -265,7 +265,7 @@
                     NSMutableArray *currentPageImageUrls = [self excludeDuplicated:[RegManager regProcessWithContent:result1]];
                     [weakSelf.imageUrlArray addObjectsFromArray:currentPageImageUrls];
                     
-                    [weakSelf.urlArray addObjectsFromArray:[self excludeDuplicated:[RegManager crawWebWithContent:result1]]];
+                    [weakSelf.urlArray addObjectsFromArray:[self excludeDuplicated:[RegManager crawWebWithContent:result1 originURL:urlPath]]];
                     
                     if (!currentPageImageUrls.count) {
                         dispatch_async(dispatch_get_main_queue(), ^{
@@ -460,7 +460,7 @@
     if (index < self.mwPhotoArray.count) {
         return [self.mwPhotoArray objectAtIndex:index];
     }
-    return nil;
+    return nil; 
 }
 
 - (void)photoBrowser:(MWPhotoBrowser *)photoBrowser actionButtonPressedForPhotoAtIndex:(NSUInteger)index {

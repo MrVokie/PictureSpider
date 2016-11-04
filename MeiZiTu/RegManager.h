@@ -11,6 +11,6 @@
 @interface RegManager : NSObject
 
 + (NSMutableArray *)regProcessWithContent:(NSString *)content;
-+ (NSMutableArray *)crawWebWithContent:(NSString *)content;
++ (NSMutableArray *)crawWebWithContent:(NSString *)content originURL:(NSString *)originUrl;
 
 @end
