@@ -536,6 +536,7 @@
 					B8C1432D1CFDA59800B15644 = {
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = ASNS7YDT97;
+						ProvisioningStyle = Automatic;
 					};
 				};
 			};
@@ -802,6 +803,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = ASNS7YDT97;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/MeiZiTu/PrefixHeader.pch";
 				INFOPLIST_FILE = MeiZiTu/Info.plist;
@@ -820,6 +822,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = ASNS7YDT97;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/MeiZiTu/PrefixHeader.pch";
 				INFOPLIST_FILE = MeiZiTu/Info.plist;
