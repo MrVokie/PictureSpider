@@ -22,6 +22,7 @@
 #import "SettingViewController.h"
 #import "ALAssetsLibrary+CustomPhotoAlbum.h"
 #import "SplashView.h"
+#import "BloomFilter.h"
 
 #define CELL_IDENTIFIER @"WaterfallCell"
 #define HEADER_IDENTIFIER @"WaterfallHeader"
@@ -31,16 +32,26 @@
 
 @property (nonatomic, strong) UICollectionView *collectionView;
 @property (nonatomic, strong) NSArray *cellSizes;
+
 @property (nonatomic, strong) NSMutableArray *imageUrlArray;  //当前页面的图片链接
 @property (nonatomic, strong) NSMutableArray *urlArray;   //当前页面的url地址
 @property (nonatomic, strong) NSMutableArray *mwPhotoArray;
+
 @property (nonatomic, retain) SubscribeView *subView;
+
 @property (nonatomic, retain) NSString *homeWebsite;
-@property (nonatomic, strong) ALAssetsLibrary * assetsLibrary;
+
+@property (nonatomic, strong) ALAssetsLibrary *assetsLibrary;
+
 @property (nonatomic, assign) NSInteger webUrlIndex;
+
 @property (nonatomic, retain) SplashView *splashView;
+
 @property (nonatomic, assign) BOOL isShowStatusBar;
+
 @property (nonatomic, retain) CWStatusBarNotification *notification;
+
+@property (nonatomic, retain) BloomFilter *bloomFilter;
 @end
 
 @implementation ViewController
@@ -71,6 +82,18 @@
                    withReuseIdentifier:FOOTER_IDENTIFIER];
     }
     return _collectionView;
+}
+
+- (BloomFilter *)bloomFilter {
+    if (!_bloomFilter) {
+        NSUInteger maxNumbers = 9999;
+        CGFloat falsePositiveRate = 0.01;
+        uint32_t seed = 1992;
+        
+        _bloomFilter = [[BloomFilter alloc] initWithExceptedNumberOfItems:maxNumbers falsePositiveRate:falsePositiveRate seed:seed];
+    }
+    
+    return _bloomFilter;
 }
 
 - (NSArray *)cellSizes {
@@ -183,6 +206,7 @@
         _imageUrlArray = nil;
         _urlArray = nil;
         _mwPhotoArray = nil;
+        _bloomFilter = nil;
         
         //切换网址或者重新头部刷新时、停下footer刷新
         [self.collectionView.mj_footer endRefreshing];
@@ -213,9 +237,8 @@
                         // 更新界面
                         [self.collectionView reloadData];
                         [self.collectionView.mj_header endRefreshing];
-                        if ([AppDefault sharedManager].autoLoadMore) {
-                            [self.collectionView.mj_footer beginRefreshing];
-                        }
+                        //继续请求下一网页
+                        [self.collectionView.mj_footer beginRefreshing];
                     });
                 });
                 
@@ -246,39 +269,35 @@
                     // 耗时的操作
                     NSString *result1 = [EncodeManager encodeWithData:responseObject];
                     
+                    
+                    NSMutableArray *currentPageImageUrls = nil;
+                    
                     if (result1 == nil || result1.length == 0) {
+                        currentPageImageUrls = nil;
+                    }else{
+                        currentPageImageUrls = [self excludeDuplicated:[RegManager regProcessWithContent:result1]];
+                    }
+                    
+                    if (currentPageImageUrls == nil || currentPageImageUrls.count == 0) {
                         dispatch_async(dispatch_get_main_queue(), ^{
                             // 更新界面
                             [self.collectionView.mj_footer endRefreshing];
-                            [self.notification displayNotificationWithMessage:@"站点无数据，已为您跳过.." forDuration:2.0f];
+                            
                             self.webUrlIndex++;
                             if ([AppDefault sharedManager].autoLoadMore) {
+                                [self.notification displayNotificationWithMessage:@"站点无数据，已为您跳过.." forDuration:2.0f];
                                 [self.collectionView.mj_footer beginRefreshing];
+                            }else{
+                                [self.notification displayNotificationWithMessage:@"站点无数据.." forDuration:2.0f];
                             }
                         });
-                        
                         
                         return;
                     }
                     
-                    NSMutableArray *currentPageImageUrls = [self excludeDuplicated:[RegManager regProcessWithContent:result1]];
                     [weakSelf.imageUrlArray addObjectsFromArray:currentPageImageUrls];
                     
                     [weakSelf.urlArray addObjectsFromArray:[self excludeDuplicated:[RegManager crawWebWithContent:result1 originURL:urlPath]]];
-                    
-                    if (!currentPageImageUrls.count) {
-                        dispatch_async(dispatch_get_main_queue(), ^{
-                            // 更新界面
-                            [self.collectionView.mj_footer endRefreshing];
-                            [self.notification displayNotificationWithMessage:@"站点无数据，已为您跳过.." forDuration:2.0f];
-                            self.webUrlIndex++;
-                            if ([AppDefault sharedManager].autoLoadMore) {
-                                [self.collectionView.mj_footer beginRefreshing];
-                            }
-                        });
-                        
-                        return;
-                    }
                     
                     for (NSString *urlString in currentPageImageUrls) {
                         NSURL *url = [NSURL URLWithString:urlString];
@@ -290,19 +309,13 @@
                         // 更新界面
                         [self.collectionView reloadData];
                         [self.collectionView.mj_footer endRefreshing];
-                        
-                        if ([AppDefault sharedManager].autoLoadMore) {
-                            [self.collectionView.mj_footer beginRefreshing];
-                        }
                     });
                 });
             } failureBlock:^(NSError *error) {
                 [self.collectionView.mj_footer endRefreshing];
                 [self.notification displayNotificationWithMessage:@"站点无数据，已为您跳过.." forDuration:2.0f];
                 self.webUrlIndex++;
-                if ([AppDefault sharedManager].autoLoadMore) {
-                    [self.collectionView.mj_footer beginRefreshing];
-                }
+                [self.collectionView.mj_footer beginRefreshing];
                 
             }];
         
@@ -360,8 +373,19 @@
 }
 
 - (NSMutableArray *)excludeDuplicated:(NSMutableArray *)array {
-    NSSet *set = [NSSet setWithArray:array]; //去重
-    return [[set allObjects] mutableCopy];
+    
+    NSLog(@">>>>数量前:%ld", array.count);
+    
+    NSMutableArray *filterArray = [NSMutableArray arrayWithCapacity:20];
+    for (NSString *url in array) {
+        if (![self.bloomFilter containsString:url]) {
+            [self.bloomFilter addWithString:url];
+            [filterArray addObject:url];
+        }
+    }
+    
+    NSLog(@">>>>数量后:%ld", filterArray.count);
+    return filterArray;
 }
 
 #pragma mark - Selector

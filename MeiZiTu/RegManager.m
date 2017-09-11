@@ -12,27 +12,26 @@
 
 //提取图片链接
 + (NSMutableArray *)regProcessWithContent:(NSString *)content {
+    
+    // 目标字符串：https://img1.doubanio.com/img/trailer/small/2321871787.jpg
+    //                  (http|https|ftp|rtsp|mms)://                匹配：https://
+    //                  ((\\w)+[\\.]){1,}((\\w){1,3})               匹配：img1.doubanio.com
+    //                  (\\S*)                                      匹配：/img/trailer/small/2321871787
+    //                  (\\.gif|\\.jpg|\\.png|\\.bmp)               匹配：.jpg
+    
     //匹配的正则表达式
-    NSString* matchRegex=@"(http|https|ftp|rtsp|mms)://((\\w)+[\\.]){1,}(net|com|cn|org|cc|io|tv|[0-9]{1,3})(\\S*)(\\.gif|\\.jpg|\\.png|\\.bmp)";
+    NSString *matchRegex = @"(http|https|ftp|rtsp|mms)://((\\w)+[\\.]){1,}((\\w){1,3})(\\S*)(\\.gif|\\.jpg|\\.png|\\.bmp)";
     
     NSError *error = NULL;
-    NSRegularExpression *reg = [NSRegularExpression regularExpressionWithPattern:matchRegex
-                                                                         options:NSRegularExpressionCaseInsensitive
-                                                                           error:&error];
-    NSArray *match = [reg matchesInString:content
-                                  options:NSMatchingReportCompletion
-                                    range:NSMakeRange(0, [content length])];
+    NSRegularExpression *reg = [NSRegularExpression regularExpressionWithPattern:matchRegex options:NSRegularExpressionCaseInsensitive error:&error];
+    NSArray *match = [reg matchesInString:content options:NSMatchingReportCompletion range:NSMakeRange(0, [content length])];
     
     
     NSMutableArray *matchStringArray = [NSMutableArray array];
     // 取得所有的NSRange对象
-    if(match.count != 0)
-    {
-        for (NSTextCheckingResult *matc in match)
-        {
+    if (match.count != 0) {
+        for (NSTextCheckingResult *matc in match) {
             NSRange range = [matc range];
-            range.location = range.location;
-            range.length = range.length;
             NSString *substring = [content substringWithRange:range];
             if ([substring containsString:@"icon.png"]) {
                 continue;

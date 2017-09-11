@@ -49,7 +49,7 @@
     if ([AppDefault sharedManager].ua) {
         uaString = @"电脑站点";
     }
-    self.settingArray = @[@{@"id":@"1021", @"name":@"自动加载", @"value":@"0"},
+    self.settingArray = @[@{@"id":@"1021", @"name":@"无数据时自动跳过", @"value":@"0"},
                           @{@"id":@"1023", @"name":@"神隐切换", @"value":uaString},
                           @{@"id":@"1009", @"name":@"数据缓存", @"value":size},
                           @{@"id":@"1032", @"name":@"反馈", @"value":@"提提建议"},

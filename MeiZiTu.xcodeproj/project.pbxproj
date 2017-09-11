@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		28A17A5E2040D830BF61439E /* libPods-MeiZiTu.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DE8041BB89CE2039A7F30A2B /* libPods-MeiZiTu.a */; };
+		A923258A1F6680B30061237B /* BitVector.m in Sources */ = {isa = PBXBuildFile; fileRef = A92325851F6680B30061237B /* BitVector.m */; };
+		A923258B1F6680B30061237B /* BloomFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = A92325871F6680B30061237B /* BloomFilter.m */; };
+		A923258C1F6680B30061237B /* MurmurHash3.m in Sources */ = {isa = PBXBuildFile; fileRef = A92325891F6680B30061237B /* MurmurHash3.m */; };
 		A93109891DC6EB4A008161B8 /* SplashView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A93109871DC6EB4A008161B8 /* SplashView.xib */; };
 		A931098A1DC6EB4A008161B8 /* SplashView.m in Sources */ = {isa = PBXBuildFile; fileRef = A93109881DC6EB4A008161B8 /* SplashView.m */; };
 		A95BC3F01D05003F0057E746 /* SubscribeView.m in Sources */ = {isa = PBXBuildFile; fileRef = A95BC3EF1D05003F0057E746 /* SubscribeView.m */; };
@@ -87,6 +90,12 @@
 /* Begin PBXFileReference section */
 		1AF56C164D0A061ED3405BA3 /* Pods-MeiZiTu.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MeiZiTu.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MeiZiTu/Pods-MeiZiTu.debug.xcconfig"; sourceTree = "<group>"; };
 		94594697F91A72980C6DF343 /* Pods-MeiZiTu.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MeiZiTu.release.xcconfig"; path = "Pods/Target Support Files/Pods-MeiZiTu/Pods-MeiZiTu.release.xcconfig"; sourceTree = "<group>"; };
+		A92325841F6680B30061237B /* BitVector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BitVector.h; sourceTree = "<group>"; };
+		A92325851F6680B30061237B /* BitVector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BitVector.m; sourceTree = "<group>"; };
+		A92325861F6680B30061237B /* BloomFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BloomFilter.h; sourceTree = "<group>"; };
+		A92325871F6680B30061237B /* BloomFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BloomFilter.m; sourceTree = "<group>"; };
+		A92325881F6680B30061237B /* MurmurHash3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MurmurHash3.h; sourceTree = "<group>"; };
+		A92325891F6680B30061237B /* MurmurHash3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MurmurHash3.m; sourceTree = "<group>"; };
 		A93109861DC6EB4A008161B8 /* SplashView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SplashView.h; sourceTree = "<group>"; };
 		A93109871DC6EB4A008161B8 /* SplashView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SplashView.xib; sourceTree = "<group>"; };
 		A93109881DC6EB4A008161B8 /* SplashView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SplashView.m; sourceTree = "<group>"; };
@@ -228,6 +237,19 @@
 				94594697F91A72980C6DF343 /* Pods-MeiZiTu.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		A92325831F6680920061237B /* BloomFilter */ = {
+			isa = PBXGroup;
+			children = (
+				A92325841F6680B30061237B /* BitVector.h */,
+				A92325851F6680B30061237B /* BitVector.m */,
+				A92325861F6680B30061237B /* BloomFilter.h */,
+				A92325871F6680B30061237B /* BloomFilter.m */,
+				A92325881F6680B30061237B /* MurmurHash3.h */,
+				A92325891F6680B30061237B /* MurmurHash3.m */,
+			);
+			name = BloomFilter;
 			sourceTree = "<group>";
 		};
 		A940AC6F1DC9C8BE00DF39FB /* Main */ = {
@@ -476,6 +498,7 @@
 		B8C143301CFDA59800B15644 /* MeiZiTu */ = {
 			isa = PBXGroup;
 			children = (
+				A92325831F6680920061237B /* BloomFilter */,
 				A9721B411D0FB3EB009AFCC9 /* Model */,
 				A98726571D0115A500750B08 /* ManualPods */,
 				B869B5E71CFDA9BF0013B082 /* Catagory */,
@@ -665,11 +688,13 @@
 			files = (
 				B8C143391CFDA59800B15644 /* ViewController.m in Sources */,
 				A98726491D0114F400750B08 /* MWGridViewController.m in Sources */,
+				A923258C1F6680B30061237B /* MurmurHash3.m in Sources */,
 				A987264F1D0114F400750B08 /* UIImage+MWPhotoBrowser.m in Sources */,
 				A987264A1D0114F400750B08 /* MWPhoto.m in Sources */,
 				A9721B441D0FB471009AFCC9 /* SubscribeModel.m in Sources */,
 				A987264B1D0114F400750B08 /* MWPhotoBrowser.m in Sources */,
 				A987264D1D0114F400750B08 /* MWTapDetectingView.m in Sources */,
+				A923258A1F6680B30061237B /* BitVector.m in Sources */,
 				A98726481D0114F400750B08 /* MWGridCell.m in Sources */,
 				A991DFC21D07CCBA00C2C930 /* ALAssetsLibrary+CustomPhotoAlbum.m in Sources */,
 				B8C848591CFF2ECC00716D77 /* RegManager.m in Sources */,
@@ -689,6 +714,7 @@
 				A98726641D01293F00750B08 /* MBProgressHUD+EasyUse.m in Sources */,
 				A9E05F411CFFC21000C84177 /* CHTCollectionViewWaterfallCell.m in Sources */,
 				A98726551D01153100750B08 /* DACircularProgressView.m in Sources */,
+				A923258B1F6680B30061237B /* BloomFilter.m in Sources */,
 				A9E05F431CFFC21000C84177 /* CHTCollectionViewWaterfallFooter.m in Sources */,
 				A931098A1DC6EB4A008161B8 /* SplashView.m in Sources */,
 				B869B5E21CFDA99F0013B082 /* UIView+Vokie.m in Sources */,
