@@ -105,7 +105,10 @@
                 }
             }
             
-            [matchStringArray addObject:substring];
+            //只抓取当前域名下的所有网址。过滤跳转到其它外链。
+            if ([substring containsString:originUrl]) {
+                [matchStringArray addObject:substring];
+            }
         }
     }
     

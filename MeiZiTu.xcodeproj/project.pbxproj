@@ -535,8 +535,8 @@
 				TargetAttributes = {
 					B8C1432D1CFDA59800B15644 = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = ASNS7YDT97;
-						ProvisioningStyle = Automatic;
+						DevelopmentTeam = Y99CH2YM5T;
+						ProvisioningStyle = Manual;
 					};
 				};
 			};
@@ -803,15 +803,16 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = ASNS7YDT97;
+				DEVELOPMENT_TEAM = Y99CH2YM5T;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/MeiZiTu/PrefixHeader.pch";
 				INFOPLIST_FILE = MeiZiTu/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.vokie.MeiZiTu;
+				PRODUCT_BUNDLE_IDENTIFIER = com.vokie.healthkitdemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "38685174-aa63-41f1-b0ce-1166dc9a9e24";
+				PROVISIONING_PROFILE_SPECIFIER = healthKit;
 			};
 			name = Debug;
 		};
@@ -822,13 +823,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = ASNS7YDT97;
+				DEVELOPMENT_TEAM = "";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/MeiZiTu/PrefixHeader.pch";
 				INFOPLIST_FILE = MeiZiTu/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.vokie.MeiZiTu;
+				PRODUCT_BUNDLE_IDENTIFIER = com.vokie.healthkitdemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};

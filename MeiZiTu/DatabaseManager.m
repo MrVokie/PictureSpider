@@ -150,7 +150,6 @@ typedef NS_ENUM(NSInteger, AdminType) {
             [self.db executeUpdate:@"insert into subscribe_list(id, name, address, admin) values(?, ?, ?, ?)", @5, @"网易", @"http://www.163.com", @(AdminTypeSystem)];
             [self.db executeUpdate:@"insert into subscribe_list(id, name, address, admin) values(?, ?, ?, ?)", @2, @"豆瓣", @"https://www.douban.com", @(AdminTypeSystem)];
             [self.db executeUpdate:@"insert into subscribe_list(id, name, address, admin) values(?, ?, ?, ?)", @3, @"妹子图", @"http://www.99mm.me", @(AdminTypeSystem)];
-            [self.db executeUpdate:@"insert into subscribe_list(id, name, address, admin) values(?, ?, ?, ?)", @4, @"煎蛋网", @"http://i.jandan.net/ooxx", @(AdminTypeSystem)];
             
             //插入当前焦点页
             [self.db executeUpdate:@"insert into focus_website(web_name, website) values(?, ?)", @"CocoaChina", @"http://www.CocoaChina.com"];
@@ -162,8 +161,8 @@ typedef NS_ENUM(NSInteger, AdminType) {
 
 
 - (void)autoUpgrade {
-    NSArray *upgradeArray = @[@"insert into subscribe_list(name, address, admin) values('糗事百科', 'http://www.qiushibaike.com', 0)",
-                              @"",//TODO
+    NSArray *upgradeArray = @[
+                              @"insert into subscribe_list(name, address, admin) values('优姿', 'www.youzi4.com', 0)",//TODO
                               ];
     
     if ([self.db open]) {

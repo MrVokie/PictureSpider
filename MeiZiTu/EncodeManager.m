@@ -13,16 +13,21 @@
 + (NSString *)encodeWithData:(NSData *)data {
     NSString *result = nil;
     result = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+    
+    NSLog(@"解码结果:\n%@", result);
+    
     if (result != nil && result.length > 0 && [result containsString:@"html"]) {
         return result;
     }
     
     result = [[NSString alloc]initWithData:data encoding:NSASCIIStringEncoding];
+    NSLog(@"解码结果:\n%@", result);
     if (result != nil && result.length > 0 && [result containsString:@"html"]) {
         return result;
     }
     
     result = [[NSString alloc]initWithData:data encoding:NSUnicodeStringEncoding];
+    NSLog(@"解码结果:\n%@", result);
     if (result != nil && result.length > 0 && [result containsString:@"html"]) {
         return result;
     }
@@ -30,6 +35,7 @@
     //GBK解码
     NSStringEncoding enc = CFStringConvertEncodingToNSStringEncoding (kCFStringEncodingGB_18030_2000);
     result=[[NSString alloc]initWithData:data encoding:enc];
+    NSLog(@"解码结果:\n%@", result);
     if (result != nil && result.length > 0 && [result containsString:@"html"]) {
         return result;
     }

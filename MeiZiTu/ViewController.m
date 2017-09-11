@@ -179,16 +179,15 @@
     self.collectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         
         
-            _webUrlIndex = 0;
-            _imageUrlArray = nil;
-            _urlArray = nil;
-            _mwPhotoArray = nil;
-            
-            //切换网址或者重新头部刷新时、停下footer刷新
-            [self.collectionView.mj_footer endRefreshing];
-            
-            // 进入刷新状态后会自动调用这个block
-            [[HTTPSessionManager sharedManager]requestWithMethod:GET path:self.homeWebsite params:nil successBlock:^(id responseObject) {
+        _webUrlIndex = 0;
+        _imageUrlArray = nil;
+        _urlArray = nil;
+        _mwPhotoArray = nil;
+        
+        //切换网址或者重新头部刷新时、停下footer刷新
+        [self.collectionView.mj_footer endRefreshing];
+        // 进入刷新状态后会自动调用这个block
+        [[HTTPSessionManager sharedManager]requestWithMethod:GET path:self.homeWebsite params:nil successBlock:^(id responseObject) {
                 
                 dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
                     // 耗时的操作
@@ -237,7 +236,7 @@
                 [self.collectionView.mj_footer endRefreshing];
                 return;
             }
-            
+        
             NSString *urlPath = self.urlArray[self.webUrlIndex];
             
             // 进入刷新状态后会自动调用这个block
