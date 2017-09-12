@@ -16,7 +16,7 @@
     if (self = [super initWithFrame:frame]) {
         
         UIImageView *imageView = [[UIImageView alloc]initWithFrame:frame];
-        [imageView sd_setImageWithURL:[NSURL URLWithString:@"https://avatars0.githubusercontent.com/u/5802573?v=4&s=460"] placeholderImage:[UIImage imageNamed:@"default_image"] options:SDWebImageProgressiveDownload];
+        [imageView sd_setImageWithURL:[NSURL URLWithString:@"https://raw.githubusercontent.com/MrVokie/MeiZiTu/0b8ed13a54bece761c05569ec6295c915ba09b02/home.jpg"] placeholderImage:[UIImage imageNamed:@"default_image"] options:SDWebImageProgressiveDownload];
         imageView.contentMode = UIViewContentModeScaleAspectFill;
         imageView.clipsToBounds = YES;
         [self addSubview:imageView];
