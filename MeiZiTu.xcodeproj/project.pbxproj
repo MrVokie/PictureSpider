@@ -15,6 +15,7 @@
 		A931098A1DC6EB4A008161B8 /* SplashView.m in Sources */ = {isa = PBXBuildFile; fileRef = A93109881DC6EB4A008161B8 /* SplashView.m */; };
 		A95BC3F01D05003F0057E746 /* SubscribeView.m in Sources */ = {isa = PBXBuildFile; fileRef = A95BC3EF1D05003F0057E746 /* SubscribeView.m */; };
 		A95BC3F21D0502450057E746 /* SubscribeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A95BC3F11D0502450057E746 /* SubscribeView.xib */; };
+		A96507641F67D04A00EF243A /* CustomTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = A96507631F67D04A00EF243A /* CustomTitleView.m */; };
 		A9721B441D0FB471009AFCC9 /* SubscribeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A9721B431D0FB471009AFCC9 /* SubscribeModel.m */; };
 		A97F304C1DC6F29900918191 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A97F304B1DC6F29900918191 /* Main.storyboard */; };
 		A97F30501DC71C2F00918191 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A97F304F1DC71C2F00918191 /* Launch Screen.storyboard */; };
@@ -102,6 +103,8 @@
 		A95BC3EE1D05003F0057E746 /* SubscribeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubscribeView.h; sourceTree = "<group>"; };
 		A95BC3EF1D05003F0057E746 /* SubscribeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubscribeView.m; sourceTree = "<group>"; };
 		A95BC3F11D0502450057E746 /* SubscribeView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SubscribeView.xib; sourceTree = "<group>"; };
+		A96507621F67D04A00EF243A /* CustomTitleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomTitleView.h; sourceTree = "<group>"; };
+		A96507631F67D04A00EF243A /* CustomTitleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomTitleView.m; sourceTree = "<group>"; };
 		A9721B421D0FB471009AFCC9 /* SubscribeModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubscribeModel.h; sourceTree = "<group>"; };
 		A9721B431D0FB471009AFCC9 /* SubscribeModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubscribeModel.m; sourceTree = "<group>"; };
 		A97F304B1DC6F29900918191 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
@@ -279,6 +282,8 @@
 				A98726651D01327300750B08 /* Waterfall */,
 				B8C143371CFDA59800B15644 /* ViewController.h */,
 				B8C143381CFDA59800B15644 /* ViewController.m */,
+				A96507621F67D04A00EF243A /* CustomTitleView.h */,
+				A96507631F67D04A00EF243A /* CustomTitleView.m */,
 			);
 			name = Home;
 			sourceTree = "<group>";
@@ -686,6 +691,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A96507641F67D04A00EF243A /* CustomTitleView.m in Sources */,
 				B8C143391CFDA59800B15644 /* ViewController.m in Sources */,
 				A98726491D0114F400750B08 /* MWGridViewController.m in Sources */,
 				A923258C1F6680B30061237B /* MurmurHash3.m in Sources */,

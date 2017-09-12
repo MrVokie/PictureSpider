@@ -10,7 +10,7 @@
 
 @interface RegManager : NSObject
 
-+ (NSMutableArray *)regProcessWithContent:(NSString *)content;
++ (NSMutableArray *)regProcessWithContent:(NSString *)content originURL:(NSString *)originUrl;
 + (NSMutableArray *)crawWebWithContent:(NSString *)content originURL:(NSString *)originUrl;
 
 @end

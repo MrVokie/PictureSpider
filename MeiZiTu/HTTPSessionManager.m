@@ -19,7 +19,7 @@
         self.responseSerializer = [AFHTTPResponseSerializer serializer];
         self.requestSerializer.timeoutInterval = 8;
         self.requestSerializer.cachePolicy = NSURLRequestReloadIgnoringLocalCacheData;
-        [self.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+        [self.requestSerializer setValue:@"*/*" forHTTPHeaderField:@"Accept"];
         [self.requestSerializer setValue:url.absoluteString forHTTPHeaderField:@"Referer"];
         
         BOOL uaflag = [AppDefault sharedManager].ua;
@@ -49,12 +49,14 @@
              successBlock:(requestSuccessBlock)success
               failureBlock:(requestFailureBlock)failure {
     
-    //对没有输入http货https前缀的地址加上这个前缀
+    //对没有输入http或https前缀的地址加上这个前缀
     if (![path containsString:@"http://"] && ![path containsString:@"https://"]) {
         path = [NSString stringWithFormat:@"http://%@", path];
     }
     
     path = [path stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    
+    NSLog(@"请求地址：%@", path);
     switch (method) {
         case GET:{
             [self GET:path parameters:params progress:nil success:^(NSURLSessionTask *task, id responseObject) {

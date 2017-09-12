@@ -23,6 +23,7 @@
 #import "ALAssetsLibrary+CustomPhotoAlbum.h"
 #import "SplashView.h"
 #import "BloomFilter.h"
+#import "CustomTitleView.h"
 
 #define CELL_IDENTIFIER @"WaterfallCell"
 #define HEADER_IDENTIFIER @"WaterfallHeader"
@@ -52,6 +53,8 @@
 @property (nonatomic, retain) CWStatusBarNotification *notification;
 
 @property (nonatomic, retain) BloomFilter *bloomFilter;
+
+@property (nonatomic, retain) CustomTitleView *customTitleView;
 @end
 
 @implementation ViewController
@@ -148,7 +151,7 @@
         //订阅网址点击，回调的block
         __weak typeof(self) weakSelf = self;
         _subView.chooseBlock = ^(NSString *name, NSString *address) {
-            weakSelf.navigationItem.title = name;
+            weakSelf.customTitleView.mainTitle.text = name;
             weakSelf.homeWebsite = address;
             [[DatabaseManager sharedManager] updateFocusWebsite:address name:name];
             [weakSelf.collectionView.mj_header beginRefreshing];
@@ -194,7 +197,12 @@
     
     NSDictionary *dict = [[DatabaseManager sharedManager] getFocusWebsite];
     self.homeWebsite = dict[@"site"];
-    self.navigationItem.title = dict[@"name"];
+    
+    _customTitleView = [[CustomTitleView alloc]initWithFrame:CGRectMake(0, 0, APP_SCREEN_WIDTH * 0.6, 40)];
+    _customTitleView.mainTitle.text = dict[@"name"];
+    _customTitleView.subTitle.text = @"欣赏这一刻的感动";
+    self.navigationItem.titleView = _customTitleView;
+    
     
     __weak typeof(self) weakSelf = self;
     
@@ -210,6 +218,7 @@
         
         //切换网址或者重新头部刷新时、停下footer刷新
         [self.collectionView.mj_footer endRefreshing];
+        [self.notification displayNotificationWithMessage:self.homeWebsite forDuration:2.0f];
         // 进入刷新状态后会自动调用这个block
         [[HTTPSessionManager sharedManager]requestWithMethod:GET path:self.homeWebsite params:nil successBlock:^(id responseObject) {
                 
@@ -226,7 +235,7 @@
                     }
                     
                     //对网址文本进行正则筛选图片链接，网址，并去重
-                    weakSelf.imageUrlArray = [self excludeDuplicated:[RegManager regProcessWithContent:result]];
+                    weakSelf.imageUrlArray = [self excludeDuplicated:[RegManager regProcessWithContent:result originURL:self.homeWebsite]];
                     weakSelf.urlArray = [self excludeDuplicated:[RegManager crawWebWithContent:result originURL:self.homeWebsite]];
                     
                     for (NSString *imgUrl in self.imageUrlArray) {
@@ -237,6 +246,7 @@
                         // 更新界面
                         [self.collectionView reloadData];
                         [self.collectionView.mj_header endRefreshing];
+                        self.webUrlIndex++;
                         //继续请求下一网页
                         [self.collectionView.mj_footer beginRefreshing];
                     });
@@ -261,7 +271,10 @@
             }
         
             NSString *urlPath = self.urlArray[self.webUrlIndex];
-            
+        
+            self.customTitleView.subTitle.text = [NSString stringWithFormat:@"收录：%ld，当前：%ld", self.urlArray.count, self.webUrlIndex + 1];
+        
+            [self.notification displayNotificationWithMessage:urlPath forDuration:2.0f];
             // 进入刷新状态后会自动调用这个block
             [[HTTPSessionManager sharedManager]requestWithMethod:GET path:urlPath params:nil successBlock:^(id responseObject) {
                 
@@ -275,7 +288,7 @@
                     if (result1 == nil || result1.length == 0) {
                         currentPageImageUrls = nil;
                     }else{
-                        currentPageImageUrls = [self excludeDuplicated:[RegManager regProcessWithContent:result1]];
+                        currentPageImageUrls = [self excludeDuplicated:[RegManager regProcessWithContent:result1 originURL:urlPath]];
                     }
                     
                     if (currentPageImageUrls == nil || currentPageImageUrls.count == 0) {
@@ -449,7 +462,7 @@
     browser.displayActionButton = YES; // Show action button to allow sharing, copying, etc (defaults to YES)
     browser.displayNavArrows = NO; // Whether to display left and right nav arrows on toolbar (defaults to NO)
     browser.displaySelectionButtons = NO; // Whether selection buttons are shown on each image (defaults to NO)
-    browser.zoomPhotosToFill = YES; // Images that almost fill the screen will be initially zoomed to fill (defaults to YES)
+    browser.zoomPhotosToFill = NO; // Images that almost fill the screen will be initially zoomed to fill (defaults to YES)
     browser.alwaysShowControls = NO; // Allows to control whether the bars and controls are always visible or whether they fade away to show the photo full (defaults to NO)
     browser.enableGrid = YES; // Whether to allow the viewing of all the photo thumbnails on a grid (defaults to YES)
     browser.startOnGrid = NO; // Whether to start on the grid of thumbnails instead of the first photo (defaults to NO)

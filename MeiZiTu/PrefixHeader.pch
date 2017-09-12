@@ -40,13 +40,13 @@
 #define COLOR_THEME UIColorMake(53, 179, 142)
 
 //重定义系统的NSLog函数
-#define NSLog(format, ...) do {                                                 \
-fprintf(stderr, "-----------------------开始打印值------------------------\n");   \
-fprintf(stderr, "<%s : %d行> 函数: %s\n",                                        \
-[[[NSString stringWithUTF8String:__FILE__] lastPathComponent] UTF8String],      \
-__LINE__, __func__);                                                            \
-(NSLog)((format), ##__VA_ARGS__);                                               \
-fprintf(stderr, "------------------------结束打印-------------------------\n");  \
-} while (0)
+//#define NSLog(format, ...) do {                                                 \
+//fprintf(stderr, "\n\n\n-----------------------开始打印值------------------------\n");   \
+//fprintf(stderr, "<%s : %d行> 函数: %s\n",                                        \
+//[[[NSString stringWithUTF8String:__FILE__] lastPathComponent] UTF8String],      \
+//__LINE__, __func__);                                                            \
+//(NSLog)((format), ##__VA_ARGS__);                                               \
+//fprintf(stderr, "------------------------结束打印-------------------------\n\n\n");  \
+//} while (0)
 
 #endif /* PrefixHeader_pch */
