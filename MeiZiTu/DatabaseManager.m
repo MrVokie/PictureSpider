@@ -35,6 +35,7 @@ typedef NS_ENUM(NSInteger, AdminType) {
     NSString *documentDirectory = [paths firstObject];
     NSString *dbPath = [documentDirectory stringByAppendingPathComponent:dbName];
     NSLog(@"sqlite_path: %@", dbPath);
+    
     self.db = [FMDatabase databaseWithPath:dbPath];
     if (![self.db open]) {
         //failed create database.
@@ -163,6 +164,9 @@ typedef NS_ENUM(NSInteger, AdminType) {
 - (void)autoUpgrade {
     NSArray *upgradeArray = @[
                               @"insert into subscribe_list(name, address, admin) values('优姿', 'www.youzi4.com', 0)",//TODO
+                              @"insert into subscribe_list(name, address, admin) values('美空网', 'www.moko.cc', 0)",//TODO
+                              @"insert into subscribe_list(name, address, admin) values('捧腹网', 'm.pengfu.com', 0)",//TODO
+                              @"insert into subscribe_list(name, address, admin) values('糗百美女', 'www.qiushibaike.com', 0)",//TODO
                               ];
     
     if ([self.db open]) {

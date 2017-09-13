@@ -10,7 +10,7 @@
 #import <FMDB/FMDB.h>
 
 #define DB_START_VERSION 0
-#define DB_TARGET_VERSION 1
+#define DB_TARGET_VERSION 4
 
 @interface DatabaseManager : NSObject
 @property (nonatomic, retain) FMDatabase *db;
