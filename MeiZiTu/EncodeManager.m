@@ -10,11 +10,13 @@
 
 @implementation EncodeManager
 
+
+/**
+ 尝试多种格式的解码方式，解码获取到的数据，如果包含html，则表示正常解析，返回数据
+ */
 + (NSString *)encodeWithData:(NSData *)data {
     NSString *result = nil;
     result = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
-    
-    
     
     if (result != nil && result.length > 0 && [result containsString:@"html"]) {
         return result;
